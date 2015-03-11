@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+php -f /var/www/html/setup/index.php install --base_url=$MAGENTO_URL --backend_frontname=admin --language=$MAGENTO_LANGUAGE --timezone=$MAGENTO_TIMEZONE --currency=$MAGENTO_DEFAULT_CURRENCY --db_host=$MYSQL_HOST --db_name=$MYSQL_DATABASE --db_user=$MYSQL_USER --db_pass=$MYSQL_PASSWORD --use_secure=0 --base_url_secure=0 --use_secure_admin=0 --admin_firstname=$MAGENTO_ADMIN_FIRSTNAME --admin_lastname=$MAGENTO_ADMIN_LASTNAME --admin_email=$MAGENTO_ADMIN_EMAIL --admin_username=$MAGENTO_ADMIN_USERNAME --admin_password=$MAGENTO_ADMIN_PASSWORD
