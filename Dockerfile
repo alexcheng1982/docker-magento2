@@ -20,6 +20,7 @@ RUN usermod -u 1000 www-data
 RUN a2enmod rewrite
 
 RUN apt-get update && apt-get install -y git
+RUN rm -rf /var/www/html/*
 RUN git clone https://github.com/magento/magento2.git /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 RUN find /var/www/html -type d -exec chmod 700 {} \; && find . -type f -exec chmod 600 {} \;
