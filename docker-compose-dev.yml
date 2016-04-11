@@ -1,12 +1,14 @@
-web:
-  build: .
-  ports:
-    - "80:80"
-  links:
-    - mysql
-  env_file:
-    - env
-mysql:
-  image: mysql:5.6.23
-  env_file:
-    - env
+version: '2'
+services:
+  web:
+    build: .
+    ports:
+      - "80:80"
+    links:
+      - mysql
+    env_file:
+      - env
+  mysql:
+    image: mysql:5.6.23
+    env_file:
+      - env
