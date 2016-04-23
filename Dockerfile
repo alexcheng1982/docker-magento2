@@ -39,6 +39,19 @@ RUN chmod +x /usr/local/bin/install-sampledata
 
 RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
-WORKDIR /var/www/html
+# Add supervisor
+RUN apt-get update && apt-get install -y supervisor cron
+ADD supervisord.conf /etc/supervisord.conf
+COPY ./supervisor/*.ini /etc/supervisord.d/
 
-VOLUME /var/www/html
+RUN chmod 600 /etc/supervisord.conf /etc/supervisord.d/*.ini
+
+CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
+
+# Add cron job
+ADD crontab /etc/cron.d/magento2-cron
+RUN chmod 0644 /etc/cron.d/magento2-cron
+RUN crontab -u www-data /etc/cron.d/magento2-cron
+
+VOLUME /var/www/html/var
+VOLUME /var/www/html/pub
