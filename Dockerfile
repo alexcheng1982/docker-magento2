@@ -41,4 +41,5 @@ RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 WORKDIR /var/www/html
 
-VOLUME /var/www/html
+VOLUME /var/www/html/var
+VOLUME /var/www/html/pub
