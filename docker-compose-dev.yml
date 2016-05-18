@@ -17,4 +17,11 @@ services:
   dbdata:
     image: alexcheng/data
     volumes:
-      - /var/lib/mysql   
+      - /var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db       
