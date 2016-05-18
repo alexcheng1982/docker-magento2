@@ -48,3 +48,8 @@ WORKDIR /var/www/html
 
 VOLUME /var/www/html/var
 VOLUME /var/www/html/pub
+
+# Add cron job
+ADD crontab /etc/cron.d/magento2-cron
+RUN chmod 0644 /etc/cron.d/magento2-cron
+RUN crontab -u www-data /etc/cron.d/magento2-cron

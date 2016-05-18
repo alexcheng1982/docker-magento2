@@ -1,4 +1,4 @@
-MYSQL_HOST=mysql
+MYSQL_HOST=db
 MYSQL_ROOT_PASSWORD=myrootpassword
 MYSQL_USER=magento
 MYSQL_PASSWORD=magento
