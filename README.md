@@ -55,8 +55,6 @@ $ docker exec -it <container_name> install-magento
 
 ### Sample data
 
-**Please note** Not working for Magento 2.2.0 yet.
-
 ~~~
 $ docker exec -it <container_name> install-sampledata
 ~~~
