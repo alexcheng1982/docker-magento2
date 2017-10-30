@@ -34,6 +34,8 @@ RUN cd /var/www/html \
     && find . -type f -exec chmod 660 {} \; \
     && chmod u+x bin/magento
 
+RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"   
+
 COPY ./bin/install-magento /usr/local/bin/install-magento
 RUN chmod +x /usr/local/bin/install-magento
 
