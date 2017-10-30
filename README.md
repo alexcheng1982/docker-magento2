@@ -8,6 +8,8 @@ This repo converts the [long installation guide](http://devdocs.magento.com/guid
 
 For documentation, please refer to the Magento 1.x [repo](https://github.com/alexcheng1982/docker-magento). These two Docker images follow the same instructions. 
 
+**Please note: this Docker image is for development and testing only, not for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
+
 Below are some basic instructions.
 
 ## Quick start
@@ -52,8 +54,6 @@ $ docker exec -it <container_name> install-magento
 ~~~
 
 ### Sample data
-
-**Please note** Not working for Magento 2.2.0 yet.
 
 ~~~
 $ docker exec -it <container_name> install-sampledata
