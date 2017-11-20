@@ -4,7 +4,7 @@ su www-data <<EOSU
 
 ln -s ~/.composer/auth.json /var/www/html/var/composer_home/
 
-composer update -d=/var/www/html
+composer update
 
 /var/www/html/bin/magento sampledata:deploy
 

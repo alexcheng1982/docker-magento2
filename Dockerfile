@@ -26,6 +26,7 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
     && apt-get purge --auto-remove -y $requirementsToRemove
 
 COPY ./auth.json /var/www/.composer/
+COPY ./auth.json /var/www/html/
 RUN chsh -s /bin/bash www-data
 RUN chown -R www-data:www-data /var/www
 RUN su www-data -c "cd /var/www/html && composer install"
@@ -34,7 +35,7 @@ RUN cd /var/www/html \
     && find . -type f -exec chmod 660 {} \; \
     && chmod u+x bin/magento
 
-RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"   
+RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"
 
 COPY ./bin/install-magento /usr/local/bin/install-magento
 RUN chmod +x /usr/local/bin/install-magento

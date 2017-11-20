@@ -4,10 +4,12 @@ services:
     image: alexcheng/magento2
     ports:
       - "80:80"
-    links:
+    depends_on:
       - db
     env_file:
       - env
+    volumes:
+      - /Users/tamdao/Downloads/code/Simplypost/:/var/www/html/app/code/Simplypost/
   db:
     image: mysql:5.6.23
     volumes:
@@ -19,7 +21,8 @@ services:
     container_name: phpmyadmin
     ports:
       - "8580:80"
-    links:
-      - db     
+    depends_on:
+      - db
+
 volumes:
-  db-data: 
+  db-data:
