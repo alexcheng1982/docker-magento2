@@ -1,4 +1,4 @@
-FROM alexcheng/apache2-php7
+FROM alexcheng/apache2-php7:7.1.11
 
 MAINTAINER Fu Cheng <alexcheng1982@gmail.com>
 
@@ -54,7 +54,7 @@ RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 #Commented out the next 3 lines, because i don't see no use of this
-#WORKDIR /var/www/html
+WORKDIR /var/www/html
 #VOLUME /var/www/html/var
 #VOLUME /var/www/html/pub
 
