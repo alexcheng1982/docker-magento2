@@ -4,15 +4,20 @@ MAINTAINER Fu Cheng <alexcheng1982@gmail.com>
 
 RUN a2enmod rewrite
 
-ENV MAGENTO_VERSION 2.2.0
+ENV MAGENTO_VERSION 2.2.1
 
-RUN rm -rf /var/www/html/*
+RUN rm -rf /var/www/html/* \
+    && apt-get update \
+    && apt-get install -y wget
+
 RUN cd /tmp && curl https://codeload.github.com/magento/magento2/tar.gz/$MAGENTO_VERSION -o $MAGENTO_VERSION.tar.gz && tar xvf $MAGENTO_VERSION.tar.gz && mv magento2-$MAGENTO_VERSION/* magento2-$MAGENTO_VERSION/.htaccess /var/www/html
 
-RUN curl -sS https://getcomposer.org/installer | php
-RUN mv composer.phar /usr/local/bin/composer
+
+RUN curl -sS https://getcomposer.org/installer | php \
+    && mv composer.phar /usr/local/bin/composer
 RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg-turbo8 libjpeg-turbo8-dev libpng12-dev libfreetype6-dev libicu-dev libxslt1-dev" \
-    && apt-get update && apt-get install -y $requirements && rm -rf /var/lib/apt/lists/* \
+    && apt-get install -y $requirements \
+    && rm -rf /var/lib/apt/lists/* \
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
@@ -34,7 +39,9 @@ RUN cd /var/www/html \
     && find . -type f -exec chmod 660 {} \; \
     && chmod u+x bin/magento
 
-RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"   
+
+RUN su www-data -c "cd /var/www/html && composer config repositories.magento composer https://repo.magento.com/"
+
 
 COPY ./bin/install-magento /usr/local/bin/install-magento
 RUN chmod +x /usr/local/bin/install-magento
@@ -46,12 +53,12 @@ RUN echo "memory_limit=1024M" > /usr/local/etc/php/conf.d/memory-limit.ini
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /var/www/html
-
-VOLUME /var/www/html/var
-VOLUME /var/www/html/pub
+#Commented out the next 3 lines, because i don't see no use of this
+#WORKDIR /var/www/html
+#VOLUME /var/www/html/var
+#VOLUME /var/www/html/pub
 
 # Add cron job
 ADD crontab /etc/cron.d/magento2-cron
-RUN chmod 0644 /etc/cron.d/magento2-cron
-RUN crontab -u www-data /etc/cron.d/magento2-cron
+RUN chmod 0644 /etc/cron.d/magento2-cron \
+    && crontab -u www-data /etc/cron.d/magento2-cron
