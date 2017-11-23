@@ -61,7 +61,7 @@ $ docker exec -it <container_name> install-sampledata
 
 ### Database
 
-The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8085`. Use MySQL username and password to log in.
+The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8580`. Use MySQL username and password to log in.
 
 ## FAQ
 
