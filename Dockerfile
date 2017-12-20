@@ -4,7 +4,7 @@ MAINTAINER Fu Cheng <alexcheng1982@gmail.com>
 
 RUN a2enmod rewrite
 
-ENV MAGENTO_VERSION 2.2.1
+ENV MAGENTO_VERSION 2.2.2
 
 RUN rm -rf /var/www/html/* \
     && apt-get update \
