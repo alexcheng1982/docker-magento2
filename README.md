@@ -43,6 +43,10 @@ MAGENTO_ADMIN_PASSWORD=magentorocks1
 
 For example, if you want to change the default currency, just update the variable `MAGENTO_DEFAULT_CURRENCY`, e.g. `MAGENTO_DEFAULT_CURRENCY=USD`.
 
+Please see the following video for a quick demo.
+
+[![Use Magento 2 with Docker](https://img.youtube.com/vi/18tOf_cuQKg/0.jpg)](https://www.youtube.com/watch?v=18tOf_cuQKg "Use Magento 2 with Docker")
+
 ## Installation
 
 After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file.
