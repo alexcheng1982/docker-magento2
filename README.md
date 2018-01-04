@@ -84,3 +84,7 @@ Depends on how the container is used,
 * When using the GUI setup page of Magento 2, update configurations in the UI.
 * When using the script, update configurations in the `env` file. 
 * When starting Magento 2 as a standalone container, use `-e` to pass environment variables.
+
+### Why getting access denied error after changing the default DB password?
+
+If you change the default DB password in `env` file and get the access denied error when installing Magento 2, see [this issue comment](https://github.com/alexcheng1982/docker-magento2/issues/10#issuecomment-355382150).
