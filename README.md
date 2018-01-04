@@ -45,7 +45,7 @@ For example, if you want to change the default currency, just update the variabl
 
 Please see the following video for a quick demo.
 
-[![Use Magento 2 with Docker](https://img.youtube.com/vi/18tOf_cuQKg/0.jpg)](https://www.youtube.com/watch?v=18tOf_cuQKg "Use Magento 2 with Docker")
+[![Use Magento 2 with Docker](https://img.youtube.com/vi/18tOf_cuQKg/hqdefault.jpg)](https://www.youtube.com/watch?v=18tOf_cuQKg "Use Magento 2 with Docker")
 
 ## Installation
 
