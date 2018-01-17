@@ -63,6 +63,8 @@ $ docker exec -it <container_name> install-magento
 $ docker exec -it <container_name> install-sampledata
 ~~~
 
+**Please note:** Sample data for Magento 2.2.2 doesn't work at the moment, see [this issue](https://github.com/alexcheng1982/docker-magento2/issues/11).
+
 ### Database
 
 The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8580`. Use MySQL username and password to log in.
