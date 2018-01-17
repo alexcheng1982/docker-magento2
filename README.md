@@ -90,3 +90,59 @@ Depends on how the container is used,
 ### Why getting access denied error after changing the default DB password?
 
 If you change the default DB password in `env` file and get the access denied error when installing Magento 2, see [this issue comment](https://github.com/alexcheng1982/docker-magento2/issues/10#issuecomment-355382150).
+
+## Develop and test using this Docker image
+
+As I mentioned before, this Docker image is primarily used for development and testing. Depends on the tasks you are trying to do, there are different ways to use this Docker image.
+
+### Extensions and themes
+
+You can keep the extensions and themes directories on your local host machine, and use Docker Compose [volumes](https://docs.docker.com/compose/compose-file/#volumes) to install the extensions and themes. For example, if you have a theme in the directory `/dev/mytheme`, you can install it by specifying it in the `docker-composer.yml` file. Then you can see the theme in Magento admin UI.
+
+```yml
+version: '3.0'
+services:
+  web:
+    image: alexcheng/magento2
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+    volumes:
+      - /dev/mytheme:/var/www/html/app/design/frontend/mytheme/default
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - db-data:/var/lib/mysql/data
+    env_file:
+      - env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db
+volumes:
+  db-data:
+```
+
+### Modify Magento core files
+
+If you want to modify Magento core files, you cannot modify them directly in the container. Those changes will be lost. It's also not recommended to update Magento core files directly, which makes upgrading Magento a painful process. Actually, Docker makes the process much easier if you absolutely need to modify some core files. You can use volumes to overwrite files.
+
+For example, if you want to overwrite the file `app/code/Magento/Catalog/Block/Product/Price.php`, you can copy the content to a new file in your local directory `/dev/mycode/magento_2_2` and make the changes, then use `volumes` to overwrite it.
+
+```yml
+volumes:
+  - /dev/mycode/magento_2_2/app/code/Magento/Catalog/Block/Product/Price.php:/var/www/html/app/code/Magento/Catalog/Block/Product/Price.php
+```
+
+By using Docker, we can make sure that all your changes to Magento core files are kept in one place and tracked in source code repository. These changes are also correctly aligned with different Magento versions.
+
+When deploying those changes to production servers, we can simply copy all files in the `/dev/mycode/magento_2_2` directory to Magento installation directory and overwrite existing files.
+
+### Test Magento compatibilities
+
+This Docker images has different tags for corresponding Magento versions, e.g. `2.2.1`, `2.2.2`. You can switch to different Magento versions very easily when testing extensions and themes.
