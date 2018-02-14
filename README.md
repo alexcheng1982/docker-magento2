@@ -79,6 +79,12 @@ Magento 2 cannot run with a database. This image is for Magento 2 only. It doesn
 
 For development and testing in the local environment, using `localhost` as Magento 2 URL has some issues. The default `env` file use `http://local.magento` as the value of `MAGENTO_URL`. You need to [edit your `hosts` file](https://support.rackspace.com/how-to/modify-your-hosts-file/) to add the mapping from `local.magento` to `localhost`. You can use any domain names as long as it looks like a real domain, not `localhost`.
 
+If `localhost` doesn't work, try using `127.0.0.1`.
+
+```
+127.0.0.1    local.magento
+```
+
 ### How to update Magento 2 installation configurations?
 
 Depends on how the container is used,
