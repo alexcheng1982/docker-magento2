@@ -8,6 +8,8 @@ This repo converts the [long installation guide](http://devdocs.magento.com/guid
 
 For documentation, please refer to the Magento 1.x [repo](https://github.com/alexcheng1982/docker-magento). These two Docker images follow the same instructions. 
 
+__Note__ This docker image uses the *Contributing developer* profile to install Magento, so it has limitations. See more details [here](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html).
+
 **Please note: this Docker image is for development and testing only, not for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
 
 Below are some basic instructions.
@@ -33,6 +35,10 @@ MAGENTO_LANGUAGE=en_GB
 MAGENTO_TIMEZONE=Pacific/Auckland
 MAGENTO_DEFAULT_CURRENCY=NZD
 MAGENTO_URL=http://local.magento
+MAGENTO_BACKEND_FRONTNAME=admin
+MAGENTO_USE_SECURE=0
+MAGENTO_BASE_URL_SECURE=0
+MAGENTO_USE_SECURE_ADMIN=0
 
 MAGENTO_ADMIN_FIRSTNAME=Admin
 MAGENTO_ADMIN_LASTNAME=MyStore
@@ -42,6 +48,8 @@ MAGENTO_ADMIN_PASSWORD=magentorocks1
 ~~~
 
 For example, if you want to change the default currency, just update the variable `MAGENTO_DEFAULT_CURRENCY`, e.g. `MAGENTO_DEFAULT_CURRENCY=USD`.
+
+You can find all available options in the official [setup guide](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento). If you need more options, fork this repo and add them in `bin\install-magento`.
 
 Please see the following video for a quick demo.
 
