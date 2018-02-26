@@ -12,6 +12,12 @@ __Note__ This docker image uses the *Contributing developer* profile to install 
 
 **Please note: this Docker image is for development and testing only, not for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
 
+## Magento 2 installation types
+
+Magento 2 has three different ways to [install](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html), for users, integrators and developers. This Docker image uses **integrator** as the default installation type, so the **Web Setup Wizard** can be used. For each version, both integrator and developer installation types are available. The user installation type is not currently supported.
+
+For example, Magento 2 version `2.2.2` has tag `2.2.2`, `2.2.2-integrator` and `2.2.2-developer`. `2.2.2` is the same as `2.2.2-integrator`.
+
 Below are some basic instructions.
 
 ## Quick start
