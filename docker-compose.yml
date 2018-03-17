@@ -16,7 +16,6 @@ services:
       - env
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: phpmyadmin
     ports:
       - "8580:80"
     links:
