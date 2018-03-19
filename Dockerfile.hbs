@@ -1,6 +1,8 @@
 FROM alexcheng/apache2-php7:{{phpVersion}}
 
-Label maintainer="alexcheng1982@gmail.com"
+LABEL maintainer="alexcheng1982@gmail.com"
+LABEL version="{{magento2Version}}"
+LABEL description="Magento {{magento2Version}}"
 
 ENV MAGENTO_VERSION {{magento2Version}}
 ENV INSTALL_DIR /var/www/html
