@@ -1,10 +1,10 @@
 FROM alexcheng/apache2-php7:7.0.24
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL version="2.0.17"
-LABEL description="Magento 2.0.17"
+LABEL version="2.0.18"
+LABEL description="Magento 2.0.18"
 
-ENV MAGENTO_VERSION 2.0.17
+ENV MAGENTO_VERSION 2.0.18
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
