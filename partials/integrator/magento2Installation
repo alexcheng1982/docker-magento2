@@ -1,0 +1,2 @@
+RUN chown -R www-data:www-data /var/www
+RUN su www-data -c "composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $INSTALL_DIR $MAGENTO_VERSION"
