@@ -3,11 +3,13 @@ services:
   web:
     image: alexcheng/magento2
     ports:
-      - "80:80"
+      - "3701:80"
     links:
       - db
     env_file:
       - env
+    volumes:
+      - ./custom-plugins/:/var/www/html/custom-plugins
   db:
     image: mysql:5.6.23
     volumes:
