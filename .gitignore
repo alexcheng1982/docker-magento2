@@ -1,3 +1,4 @@
 .bash_history
 node_modules
 .idea
+custom-plugins/*
