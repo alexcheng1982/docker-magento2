@@ -8,6 +8,8 @@ services:
       - db
     env_file:
       - env
+    volumes:
+      - ./custom-plugins/:/var/www/html/custom-plugins
   db:
     image: mysql:5.6.23
     volumes:
