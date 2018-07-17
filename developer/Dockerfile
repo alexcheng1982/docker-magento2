@@ -1,10 +1,10 @@
 FROM alexcheng/apache2-php7:7.1.11
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL version="2.2.3"
-LABEL description="Magento 2.2.3"
+LABEL version="2.2.4"
+LABEL description="Magento 2.2.4"
 
-ENV MAGENTO_VERSION 2.2.3
+ENV MAGENTO_VERSION 2.2.4
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
@@ -25,6 +25,7 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
     && docker-php-ext-install intl \
     && docker-php-ext-install xsl \
     && docker-php-ext-install soap \
+    && docker-php-ext-install bcmath \
     && requirementsToRemove="libpng12-dev libmcrypt-dev libcurl3-dev libpng12-dev libfreetype6-dev libjpeg-turbo8-dev" \
     && apt-get purge --auto-remove -y $requirementsToRemove
 
