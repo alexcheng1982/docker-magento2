@@ -1,12 +1,12 @@
 const Handlebars = require('handlebars');
 const Promise = require('bluebird');
 const merge = require('lodash.merge');
-const fs = Promise.promisifyAll(require("fs"));
-const path = require("path");
+const fs = Promise.promisifyAll(require('fs'));
+const path = require('path');
 
 const commonOptions = {
   phpVersion: '7.1.11',
-  magento2Version: '2.2.5',
+  magento2Version: '2.2.6',
 };
 
 function readPartial(profile, section) {
@@ -38,5 +38,5 @@ Promise.map(profiles, profile => {
     return Promise.map(filesToCopy, fileToCopy => copyFile(fileToCopy, profile))
       .then(_ => Promise.map(templatedFiles, templatedFile => writeFile(context, profile, templatedFile)));
   });
-}).then(() => console.log("Update successfully"))
+}).then(() => console.log('Update successfully'))
   .catch(console.error);
