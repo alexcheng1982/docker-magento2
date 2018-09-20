@@ -9,9 +9,9 @@ services:
     env_file:
       - env
   db:
-    image: mysql:5.6.23
+    image: mysql:5.7
     volumes:
-      - db-data:/var/lib/mysql/data
+      - db-data:/var/lib/mysql
     env_file:
       - env
   phpmyadmin:
@@ -20,6 +20,6 @@ services:
     ports:
       - "8580:80"
     links:
-      - db     
+      - db
 volumes:
   db-data: 

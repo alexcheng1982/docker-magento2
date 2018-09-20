@@ -133,9 +133,9 @@ services:
     volumes:
       - /dev/mytheme:/var/www/html/app/design/frontend/mytheme/default
   db:
-    image: mysql:5.6.23
+    image: mysql:5.7
     volumes:
-      - db-data:/var/lib/mysql/data
+      - db-data:/var/lib/mysql
     env_file:
       - env
   phpmyadmin:
