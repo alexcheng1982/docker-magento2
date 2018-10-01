@@ -2,7 +2,7 @@ FROM alexcheng/apache2-php7:7.0.24
 
 Label maintainer="alexcheng1982@gmail.com"
 
-ENV MAGENTO_VERSION 2.1.14
+ENV MAGENTO_VERSION 2.1.15
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
