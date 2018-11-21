@@ -1,8 +1,9 @@
 FROM quay.io/alexcheng1982/apache2-php7:7.1.24
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL version="2.2.6"
-LABEL description="Magento 2.2.6"
+LABEL php_version="7.1.24"
+LABEL magento_version="2.2.6"
+LABEL description="Magento 2.2.6 with PHP 7.1.24"
 
 ENV MAGENTO_VERSION 2.2.6
 ENV INSTALL_DIR /var/www/html

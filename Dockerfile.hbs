@@ -1,8 +1,9 @@
 FROM quay.io/alexcheng1982/apache2-php7:{{phpVersion}}
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL version="{{magento2Version}}"
-LABEL description="Magento {{magento2Version}}"
+LABEL php_version="{{phpVersion}}"
+LABEL magento_version="{{magento2Version}}"
+LABEL description="Magento {{magento2Version}} with PHP {{phpVersion}}"
 
 ENV MAGENTO_VERSION {{magento2Version}}
 ENV INSTALL_DIR /var/www/html
