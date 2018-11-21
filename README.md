@@ -6,11 +6,11 @@
 
 This repo converts the [long installation guide](http://devdocs.magento.com/guides/v1.0/install-gde/bk-install-guide.html) of Magento 2 into simple Docker image to use. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
 
-For documentation, please refer to the Magento 1.x [repo](https://github.com/alexcheng1982/docker-magento). These two Docker images follow the same instructions. 
+This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7.
 
 __Note__ This docker image uses the *Contributing developer* profile to install Magento, so it has limitations. See more details [here](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html).
 
-**Please note: this Docker image is for development and testing only, not for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
+**Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
 
 ## Magento 2 installation types
 

@@ -1,0 +1,25 @@
+version: '3.0'
+services:
+  web:
+    build: ./integrator
+    ports:
+      - "80:80"
+    links:
+      - db
+    env_file:
+      - env
+  db:
+    image: mysql:5.6.23
+    volumes:
+      - db-data:/var/lib/mysql/data
+    env_file:
+      - env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db     
+volumes:
+  db-data: 

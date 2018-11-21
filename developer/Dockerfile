@@ -1,4 +1,4 @@
-FROM alexcheng/apache2-php7:7.1.11
+FROM quay.io/alexcheng1982/apache2-php7:7.1.24
 
 LABEL maintainer="alexcheng1982@gmail.com"
 LABEL version="2.2.6"
