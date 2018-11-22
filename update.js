@@ -5,7 +5,7 @@ const fs = Promise.promisifyAll(require("fs"));
 const path = require("path");
 
 const commonOptions = {
-  phpVersion: '7.0.24',
+  phpVersion: '7.0.32',
   magento2Version: '2.1.15',
 };
 
