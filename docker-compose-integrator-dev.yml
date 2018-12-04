@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: 9a940b8e81ff
+    build: ./integrator
     ports:
       - "80:80"
     links:
