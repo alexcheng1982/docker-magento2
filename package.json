@@ -1,0 +1,22 @@
+{
+  "name": "docker-magento2",
+  "version": "1.0.0",
+  "description": "Docker image for Magento 2",
+  "main": "update.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexcheng1982/docker-magento2.git"
+  },
+  "keywords": [],
+  "author": "Fu Cheng <alexcheng1982@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/alexcheng1982/docker-magento2/issues"
+  },
+  "homepage": "https://github.com/alexcheng1982/docker-magento2#readme",
+  "dependencies": {
+    "bluebird": "^3.5.1",
+    "handlebars": "^4.0.11",
+    "lodash.merge": "^4.6.1"
+  }
+}

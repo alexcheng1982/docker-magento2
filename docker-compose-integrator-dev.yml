@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: alexcheng/magento2
+    image: 9a940b8e81ff
     ports:
       - "80:80"
     links:
@@ -16,6 +16,7 @@ services:
       - env
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
     ports:
       - "8580:80"
     links:
