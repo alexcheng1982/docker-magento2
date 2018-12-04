@@ -6,9 +6,7 @@
 
 This repo converts the [long installation guide](http://devdocs.magento.com/guides/v1.0/install-gde/bk-install-guide.html) of Magento 2 into simple Docker image to use. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
 
-This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7.
-
-__Note__ This docker image uses the *Contributing developer* profile to install Magento, so it has limitations. See more details [here](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html).
+This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7. Please refer to the image label `php_version` for the actual PHP version.
 
 **Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
 
@@ -82,6 +80,8 @@ $ docker exec -it <container_name> install-sampledata
 ### Database
 
 The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8580`. Use MySQL username and password to log in.
+
+Magento starts support of MySQL 5.7 in version `2.1.2`. Before `2.1.2`, MySQL 5.6 should be used.
 
 ## FAQ
 

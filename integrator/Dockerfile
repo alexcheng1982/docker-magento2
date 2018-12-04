@@ -2,10 +2,10 @@ FROM quay.io/alexcheng1982/apache2-php7:7.1.24
 
 LABEL maintainer="alexcheng1982@gmail.com"
 LABEL php_version="7.1.24"
-LABEL magento_version="2.2.6"
-LABEL description="Magento 2.2.6 with PHP 7.1.24"
+LABEL magento_version="2.2.7"
+LABEL description="Magento 2.2.7 with PHP 7.1.24"
 
-ENV MAGENTO_VERSION 2.2.6
+ENV MAGENTO_VERSION 2.2.7
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
@@ -13,7 +13,7 @@ RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 COPY ./auth.json $COMPOSER_HOME
 
-RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg-turbo8 libjpeg-turbo8-dev libpng12-dev libfreetype6-dev libicu-dev libxslt1-dev" \
+RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg-turbo8 libjpeg-turbo8-dev libpng12-dev libfreetype6-dev libicu-dev libxslt1-dev unzip" \
     && apt-get update \
     && apt-get install -y $requirements \
     && rm -rf /var/lib/apt/lists/* \
