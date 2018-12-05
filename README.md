@@ -4,9 +4,11 @@
 
 [![Docker build](http://dockeri.co/image/alexcheng/magento2)](https://hub.docker.com/r/alexcheng/magento2/)
 
-This repo converts the [long installation guide](http://devdocs.magento.com/guides/v1.0/install-gde/bk-install-guide.html) of Magento 2 into simple Docker image to use. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
+[![Docker Repository on Quay](https://quay.io/repository/alexcheng1982/magento2/status "Docker Repository on Quay")](https://quay.io/repository/alexcheng1982/magento2)
 
-This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7. Please refer to the image label `php_version` for the actual PHP version.
+This repo provides Docker images for different Magento 2 versions. Refer to [this page](https://hub.docker.com/r/alexcheng/magento2/tags/) to see all available tags. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
+
+This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7. Please refer to the image label `php_version` for the actual PHP version. In general, Magento `2.1.x` uses latest PHP `7.0.x`, Magento `2.2.x` and `2.3.x` use latest PHP `7.1.x`.
 
 **Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/).**
 
@@ -26,7 +28,7 @@ The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://
 $ docker-compose up -d
 ~~~
 
-For admin username and password, please refer to the file `env`. You can also update the file `env` to update those configurations. Below are the default configurations.
+For admin username and password, please refer to the file `env`. You can also change the file `env` to update those configurations. Below are the default configurations.
 
 ~~~
 MYSQL_HOST=db
@@ -87,7 +89,7 @@ Magento starts support of MySQL 5.7 in version `2.1.2`. Before `2.1.2`, MySQL 5.
 
 ### Where is the database?
 
-Magento 2 cannot run with a database. This image is for Magento 2 only. It doesn't contain MySQL server. MySQL server should be started in another container and linked with Magento 2 container. It's recommended to use Docker Compose to start both containers. You can also use [Kubernetes](https://kubernetes.io/) or other tools.
+Magento 2 cannot run without a database. This image is for Magento 2 only. It doesn't contain MySQL server. MySQL server should be started in another container and linked with Magento 2 container. It's recommended to use Docker Compose to start both containers. You can also use [Kubernetes](https://kubernetes.io/) or other tools.
 
 ### Why accessing http://local.magento?
 
