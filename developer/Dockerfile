@@ -1,9 +1,9 @@
-FROM quay.io/alexcheng1982/apache2-php7:7.1.24
+FROM quay.io/alexcheng1982/apache2-php7:7.2.12
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL php_version="7.1.24"
+LABEL php_version="7.2.12"
 LABEL magento_version="2.3.0"
-LABEL description="Magento 2.3.0 with PHP 7.1.24"
+LABEL description="Magento 2.3.0 with PHP 7.2.12"
 
 ENV MAGENTO_VERSION 2.3.0
 ENV INSTALL_DIR /var/www/html
@@ -20,7 +20,6 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
     && docker-php-ext-install pdo_mysql \
     && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
     && docker-php-ext-install gd \
-    && docker-php-ext-install mcrypt \
     && docker-php-ext-install mbstring \
     && docker-php-ext-install zip \
     && docker-php-ext-install intl \
@@ -29,6 +28,11 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
     && docker-php-ext-install bcmath \
     && requirementsToRemove="libpng12-dev libmcrypt-dev libcurl3-dev libpng12-dev libfreetype6-dev libjpeg-turbo8-dev" \
     && apt-get purge --auto-remove -y $requirementsToRemove
+
+RUN apt-get update \
+    && apt-get install -y libmcrypt-dev \
+    && yes '' | pecl install mcrypt-1.0.1 \
+    && echo 'extension=mcrypt.so' > /usr/local/etc/php/conf.d/mcrypt.ini
 
 RUN chsh -s /bin/bash www-data
 
