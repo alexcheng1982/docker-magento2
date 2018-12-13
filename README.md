@@ -55,6 +55,18 @@ MAGENTO_ADMIN_PASSWORD=magentorocks1
 
 For example, if you want to change the default currency, just update the variable `MAGENTO_DEFAULT_CURRENCY`, e.g. `MAGENTO_DEFAULT_CURRENCY=USD`.
 
+To get all the possible values of `MAGENTO_LANGUAGE`, `MAGENTO_TIMEZONE` and `MAGENTO_DEFAULT_CURRENCY`, run the corresponding command shown below:
+
+* `MAGENTO_LANGUAGE` - `bin/magento info:language:list`
+* `MAGENTO_TIMEZONE` - `bin/magento info:timezone:list`
+* `MAGENTO_DEFAULT_CURRENCY` - `bin/magento info:currency:list`
+
+For example, to get all possible values of `MAGENTO_LANGUAGE`, run
+
+```bash
+$ docker run --rm -it alexcheng/magento2 bin/magento info:language:list
+```
+
 You can find all available options in the official [setup guide](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento). If you need more options, fork this repo and add them in `bin\install-magento`.
 
 Please see the following video for a quick demo.
