@@ -6,7 +6,7 @@ const path = require("path");
 
 const commonOptions = {
   phpVersion: '7.0.32',
-  magento2Version: '2.1.17',
+  magento2Version: '2.1.18',
 };
 
 function readPartial(profile, section) {
