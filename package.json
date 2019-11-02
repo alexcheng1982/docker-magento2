@@ -16,7 +16,7 @@
   "homepage": "https://github.com/alexcheng1982/docker-magento2#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
-    "handlebars": "^4.0.11",
+    "handlebars": "^4.1.2",
     "lodash.merge": "^4.6.1"
   }
 }
