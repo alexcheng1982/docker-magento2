@@ -102,6 +102,15 @@ Magento starts support of MySQL 5.7 in version `2.1.2`. Before `2.1.2`, MySQL 5.
 
 ## FAQ
 
+### How to keep installed Magento?
+
+You can add a volume to folder `/var/www/html`, see the `docker-compose.yml` file.
+
+```
+volumes: 
+  - magento_data:/var/www/html 
+```
+
 ### Where is the database?
 
 Magento 2 cannot run without a database. This image is for Magento 2 only. It doesn't contain MySQL server. MySQL server should be started in another container and linked with Magento 2 container. It's recommended to use Docker Compose to start both containers. You can also use [Kubernetes](https://kubernetes.io/) or other tools.
