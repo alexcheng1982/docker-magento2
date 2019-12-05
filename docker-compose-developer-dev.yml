@@ -6,6 +6,8 @@ services:
       - "80:80"
     links:
       - db
+    volumes: 
+      - magento_data:/var/www/html  
     env_file:
       - env
   db:
