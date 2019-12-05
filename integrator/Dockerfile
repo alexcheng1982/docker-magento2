@@ -1,9 +1,9 @@
-FROM quay.io/alexcheng1982/apache2-php7:7.2.12
+FROM quay.io/alexcheng1982/apache2-php7:7.3.12
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL php_version="7.2.12"
+LABEL php_version="7.3.12"
 LABEL magento_version="2.3.3"
-LABEL description="Magento 2.3.3 with PHP 7.2.12"
+LABEL description="Magento 2.3.3 with PHP 7.3.12"
 
 ENV MAGENTO_VERSION 2.3.3
 ENV INSTALL_DIR /var/www/html
@@ -13,7 +13,7 @@ RUN curl -sS https://getcomposer.org/installer | php \
     && mv composer.phar /usr/local/bin/composer
 COPY ./auth.json $COMPOSER_HOME
 
-RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg-turbo8 libjpeg-turbo8-dev libpng12-dev libfreetype6-dev libicu-dev libxslt1-dev unzip" \
+RUN requirements="libpng++-dev libzip-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype6 libjpeg-turbo8 libjpeg-turbo8-dev libfreetype6-dev libicu-dev libxslt1-dev unzip" \
     && apt-get update \
     && apt-get install -y $requirements \
     && rm -rf /var/lib/apt/lists/* \
@@ -25,13 +25,9 @@ RUN requirements="libpng12-dev libmcrypt-dev libmcrypt4 libcurl3-dev libfreetype
     && docker-php-ext-install intl \
     && docker-php-ext-install xsl \
     && docker-php-ext-install soap \
-    && docker-php-ext-install bcmath \
-    && requirementsToRemove="libpng12-dev libmcrypt-dev libcurl3-dev libpng12-dev libfreetype6-dev libjpeg-turbo8-dev" \
-    && apt-get purge --auto-remove -y $requirementsToRemove
+    && docker-php-ext-install bcmath
 
-RUN apt-get update \
-    && apt-get install -y libmcrypt-dev \
-    && yes '' | pecl install mcrypt-1.0.1 \
+RUN yes '' | pecl install mcrypt-1.0.3 \
     && echo 'extension=mcrypt.so' > /usr/local/etc/php/conf.d/mcrypt.ini
 
 RUN chsh -s /bin/bash www-data
