@@ -23,4 +23,5 @@ services:
     links:
       - db     
 volumes:
+  magento_data:
   db-data: 
