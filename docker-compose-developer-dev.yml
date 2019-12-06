@@ -7,7 +7,7 @@ services:
     links:
       - db
     volumes: 
-      - magento_data:/var/www/html  
+      - magento-data:/var/www/html  
     env_file:
       - env
   db:
