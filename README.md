@@ -108,7 +108,7 @@ You can add a volume to folder `/var/www/html`, see the `docker-compose.yml` fil
 
 ```
 volumes: 
-  - magento_data:/var/www/html 
+  - magento-data:/var/www/html 
 ```
 
 ### Where is the database?
