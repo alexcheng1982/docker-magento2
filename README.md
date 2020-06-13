@@ -143,7 +143,7 @@ As I mentioned before, this Docker image is primarily used for development and t
 
 ### Extensions and themes
 
-You can keep the extensions and themes directories on your local host machine, and use Docker Compose [volumes](https://docs.docker.com/compose/compose-file/#volumes) to install the extensions and themes. For example, if you have a theme in the directory `/dev/mytheme`, you can install it by specifying it in the `docker-composer.yml` file. Then you can see the theme in Magento admin UI.
+You can keep the extensions and themes directories on your local host machine, and use Docker Compose [volumes](https://docs.docker.com/compose/compose-file/#volumes) to install the extensions and themes. For example, if you have a theme in the directory `/tmp/mytheme`, you can install it by specifying it in the `docker-composer.yml` file. Then you can see the theme in Magento admin UI.
 
 ```yml
 version: '3.0'
@@ -157,7 +157,7 @@ services:
     env_file:
       - env
     volumes:
-      - /dev/mytheme:/var/www/html/app/design/frontend/mytheme/default
+      - /tmp/mytheme:/var/www/html/app/design/frontend/mytheme/default
   db:
     image: mysql:5.6.23
     volumes:
