@@ -2,10 +2,10 @@ FROM quay.io/alexcheng1982/apache2-php7:7.3.12
 
 LABEL maintainer="alexcheng1982@gmail.com"
 LABEL php_version="7.3.12"
-LABEL magento_version="2.3.3"
-LABEL description="Magento 2.3.3 with PHP 7.3.12"
+LABEL magento_version="2.3.4"
+LABEL description="Magento 2.3.4 with PHP 7.3.12"
 
-ENV MAGENTO_VERSION 2.3.3
+ENV MAGENTO_VERSION 2.3.4
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
