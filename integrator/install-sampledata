@@ -2,7 +2,7 @@
 
 su www-data <<EOSU
 
-/var/www/html/bin/magento sampledata:deploy
+php -d memory_limit=-1 /var/www/html/bin/magento sampledata:deploy
 
 /var/www/html/bin/magento setup:upgrade
 
