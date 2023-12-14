@@ -30,7 +30,6 @@ jobs:
       matrix:
         version:
           - 2.4.6-p3
-          - 2.4.2-p2
 
     steps:
       - name: Checkout repository

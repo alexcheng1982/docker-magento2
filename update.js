@@ -10,11 +10,6 @@ const versions = [
     magento2Version: "2.4.6-p3",
     openSearchVersion: "2",
   },
-  {
-    phpVersion: "8.1",
-    magento2Version: "2.4.2-p2",
-    openSearchVersion: "1",
-  },
 ];
 
 function getVersionDir(version) {
