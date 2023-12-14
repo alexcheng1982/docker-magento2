@@ -1,0 +1,57 @@
+version: '3.0'
+services:
+  web:
+    image: alexcheng/magento2
+    ports:
+      - "80:80"
+    links:
+      - db
+      - opensearch
+    depends_on:
+      - db
+      - opensearch
+    volumes: 
+      - magento-data:/var/www/html  
+    env_file:
+      - env
+  db:
+    image: mysql:8.0.0
+    volumes:
+      - db-data:/var/lib/mysql
+    env_file:
+      - env
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8580:80"
+    links:
+      - db
+    depends_on:
+      - db
+  opensearch:
+    image: opensearchproject/opensearch:1
+    container_name: opensearch
+    environment:
+      - cluster.name=opensearch-cluster
+      - node.name=opensearch
+      - discovery.seed_hosts=opensearch
+      - cluster.initial_cluster_manager_nodes=opensearch
+      - bootstrap.memory_lock=true 
+      - plugins.security.disabled=true
+      - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    volumes:
+      - opensearch-data:/usr/share/opensearch/data
+    ports:
+      - 9200:9200
+      - 9600:9600  
+volumes:
+  magento-data:
+  db-data:
+  opensearch-data:

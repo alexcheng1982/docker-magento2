@@ -1,42 +1,62 @@
-const Handlebars = require('handlebars');
-const Promise = require('bluebird');
-const merge = require('lodash.merge');
+const Handlebars = require("handlebars");
+const Promise = require("bluebird");
+const merge = require("lodash.merge");
 const fs = Promise.promisifyAll(require("fs"));
 const path = require("path");
 
-const commonOptions = {
-  phpVersion: '7.3.12',
-  magento2Version: '2.3.6',
-};
+const versions = [
+  {
+    phpVersion: "8.1",
+    magento2Version: "2.4.6-p3",
+    openSearchVersion: "2",
+  },
+  {
+    phpVersion: "8.1",
+    magento2Version: "2.4.2-p2",
+    openSearchVersion: "1",
+  },
+];
 
-function readPartial(profile, section) {
-  return fs.readFileAsync(path.join(__dirname, 'partials', profile, section), 'utf8');
+function getVersionDir(version) {
+  return path.join(__dirname, "versions", version);
 }
 
-function writeFile(context, profile, fileName, template) {
-  return fs.readFileAsync(path.join(__dirname, template || `${fileName}.hbs`), 'utf8')
-    .then(content => Handlebars.compile(content)(context))
-    .then(content => fs.writeFileAsync(path.join(__dirname, profile, fileName), content));
+function writeFile(context, version, fileName, template) {
+  return fs
+    .readFileAsync(path.join(__dirname, template || `${fileName}.hbs`), "utf8")
+    .then((content) => Handlebars.compile(content)(context))
+    .then((content) =>
+      fs.writeFileAsync(path.join(getVersionDir(version), fileName), content)
+    );
 }
 
-function copyFile(fileName, profile) {
-  return fs.copyFileAsync(path.join(__dirname, fileName), path.join(__dirname, profile, fileName));
+function copyFile(fileName, version) {
+  return fs.copyFileAsync(
+    path.join(__dirname, fileName),
+    path.join(getVersionDir(version), fileName)
+  );
 }
 
-const profiles = ['integrator', 'developer'];
-const sections = ['magento2Installation', 'extraCronJobs'];
-const filesToCopy = ['auth.json', 'install-magento', 'install-sampledata'];
-const templatedFiles = ['Dockerfile', 'crontab'];
-Promise.map(profiles, profile => {
-  return Promise.reduce(sections, (obj, section) => {
-    return readPartial(profile, section).then(value => {
-      obj[section] = value;
-      return obj;
-    })
-  }, {}).then(profileContext => {
-    const context = merge({}, commonOptions, profileContext);
-    return Promise.map(filesToCopy, fileToCopy => copyFile(fileToCopy, profile))
-      .then(_ => Promise.map(templatedFiles, templatedFile => writeFile(context, profile, templatedFile)));
-  });
-}).then(() => console.log("Update successfully"))
+function createVersionDir(version) {
+  const dir = getVersionDir(version);
+  if (!fs.existsSync(dir)) {
+    fs.mkdirSync(dir, { recursive: true });
+  }
+}
+
+const filesToCopy = ["auth.json", "install-magento", "install-sampledata"];
+const templatedFiles = ["Dockerfile", "docker-compose.yaml"];
+Promise.map(versions, (versionConfig) => {
+  const context = merge({}, versionConfig);
+  const version = versionConfig.magento2Version;
+  createVersionDir(version);
+  return Promise.map(filesToCopy, (fileToCopy) =>
+    copyFile(fileToCopy, version)
+  ).then((_) =>
+    Promise.map(templatedFiles, (templatedFile) =>
+      writeFile(context, version, templatedFile)
+    )
+  );
+})
+  .then(() => console.log("Updated successfully"))
   .catch(console.error);

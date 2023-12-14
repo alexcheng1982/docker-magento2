@@ -1,34 +1,32 @@
-# Docker image for Magento 2
+# Docker Image for Magento Open Source 2
 
-[![](https://images.microbadger.com/badges/image/alexcheng/magento2.svg)](http://microbadger.com/images/alexcheng/magento2)
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/alexcheng1982)
 
-[![Docker build](http://dockeri.co/image/alexcheng/magento2)](https://hub.docker.com/r/alexcheng/magento2/)
+**This repo ONLY maintains Docker images for Magento Open Source 2.4.x. You may still found Docker images for old versions in the [old registry](https://quay.io/repository/alexcheng1982/magento2).**
 
-[![Docker Repository on Quay](https://quay.io/repository/alexcheng1982/magento2/status "Docker Repository on Quay")](https://quay.io/repository/alexcheng1982/magento2)
+**Starting from Magento 2.4.x, container images are now hosted in GitHub Container Registry.**
 
-This repo provides Docker images for different Magento 2 versions. Refer to [this page](https://hub.docker.com/r/alexcheng/magento2/tags/) to see all available tags. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
+This repo provides Docker images for different Magento 2.4 versions. Refer to [this page](https://hub.docker.com/r/alexcheng/magento2/tags/) to see all available tags. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
 
-This docker image is based on my [docker-apache2-php7](https://github.com/alexcheng1982/docker-apache2-php7) image for Apache 2 and PHP 7. Please refer to the image label `php_version` for the actual PHP version. In general, Magento `2.1.x` uses latest PHP `7.0.x`, Magento `2.2.x` uses latest PHP `7.1.x`, and `2.3.x` uses latest PHP `7.2.x`. Please refer to the label `php_version` of the image to get the actual PHP version.
+This docker image is based on my [docker-apache2-php8](https://github.com/alexcheng1982/docker-apache2-php8) image for Apache 2 and PHP 8. Please refer to the image label `php_version` for the actual PHP version. In general, Magento `2.4.x` uses PHP `8.1`. Please refer to the label `php_version` of the image to get the actual PHP version.
 
-> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 18.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cron jobs working in Mangento.
+> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 22.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cron jobs working in Mangento.
 
+**Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. You can use this image as the base to build customized images.**
 
-**Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. Please refer to [official documentations](http://devdocs.magento.com/guides/v2.2/config-guide/deployment/). You can this image as the base to build customized images.**
+## Magento 2 Installation Types
 
-## Magento 2 installation types
+Magento 2.4 can be installed using [Composer](https://getcomposer.org/) or git. The git-based installation mode is used for contributor of Magento. This Docker image uses Composer as the installation type, so the **Web Setup Wizard** can be used. 
 
-Magento 2 has three different ways to [install](http://devdocs.magento.com/guides/v2.0/install-gde/bk-install-guide.html), for users, integrators and developers. This Docker image uses **integrator** as the default installation type, so the **Web Setup Wizard** can be used. For each version, both integrator and developer installation types are available. The user installation type is not currently supported.
-
-For example, Magento 2 version `2.2.2` has tag `2.2.2`, `2.2.2-integrator` and `2.2.2-developer`. `2.2.2` is the same as `2.2.2-integrator`.
 
 Below are some basic instructions.
 
-## Quick start
+## Quick Start
 
-The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://docs.docker.com/compose/). Just clone this repo and run following command in the root directory. The default `docker-compose.yml` uses MySQL and phpMyAdmin.
+The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://docs.docker.com/compose/). Just clone this repo and run following command in the root directory. The default `docker-compose.yml` uses MySQL, phpMyAdmin, and OpenSearch.
 
 ~~~
-$ docker-compose up -d
+$ docker compose up -d
 ~~~
 
 For admin username and password, please refer to the file `env`. You can also change the file `env` to update those configurations. Below are the default configurations.
@@ -54,15 +52,19 @@ MAGENTO_ADMIN_LASTNAME=MyStore
 MAGENTO_ADMIN_EMAIL=amdin@example.com
 MAGENTO_ADMIN_USERNAME=admin
 MAGENTO_ADMIN_PASSWORD=magentorocks1
+
+OPENSEARCH_HOST=opensearch
 ~~~
 
 For example, if you want to change the default currency, just update the variable `MAGENTO_DEFAULT_CURRENCY`, e.g. `MAGENTO_DEFAULT_CURRENCY=USD`.
 
 To get all the possible values of `MAGENTO_LANGUAGE`, `MAGENTO_TIMEZONE` and `MAGENTO_DEFAULT_CURRENCY`, run the corresponding command shown below:
 
-* `MAGENTO_LANGUAGE` - `bin/magento info:language:list`
-* `MAGENTO_TIMEZONE` - `bin/magento info:timezone:list`
-* `MAGENTO_DEFAULT_CURRENCY` - `bin/magento info:currency:list`
+| Variable                   | Command                          |
+| -------------------------- | -------------------------------- |
+| `MAGENTO_LANGUAGE`         | `bin/magento info:language:list` |
+| `MAGENTO_TIMEZONE`         | `bin/magento info:timezone:list` |
+| `MAGENTO_DEFAULT_CURRENCY` | `bin/magento info:currency:list` |
 
 For example, to get all possible values of `MAGENTO_LANGUAGE`, run
 
@@ -92,15 +94,32 @@ $ docker exec -it <container_name> install-magento
 $ docker exec -it <container_name> install-sampledata
 ~~~
 
-**Please note:** Sample data for Magento 2.2.2 doesn't work at the moment, see [this issue](https://github.com/alexcheng1982/docker-magento2/issues/11).
 
 ### Database
 
 The default `docker-compose.yml` uses MySQL as the database and starts [phpMyAdmin](https://www.phpmyadmin.net/). The default URL for phpMyAdmin is `http://localhost:8580`. Use MySQL username and password to log in.
 
-Magento starts support of MySQL 5.7 in version `2.1.2`. Before `2.1.2`, MySQL 5.6 should be used.
+MySQL `8.0.0` is used as the default database version.
+
+### Usage
+
+After Magento 2 is installed, open a browser and navigate to `http://local.magento/`. For admin access, navigate to `http://local.magento/admin/` and log in using the admin username and password specified in the `env` file. Default admin username and password are `admin` and `magentorocks1`, respectively.
+
+### Running on Windows
+
+When running on Windows, the port `80` may be occupied by built-in IIS or ASP.NET server. The following command finds ID of the process that occupies port `80`.
+
+```
+netstat -ano -p TCP | find /I"listening" | find /I"80"
+```
+
+Then `taskkill /F /PID <pid>` can be used to kill the process to free the port.
 
 ## FAQ
+
+### How to use a different port?
+
+If the default port `80` cannot be used for some reasons, you can change to a different port. Simply change the `MAGENTO_URL` from `http://local.magento` to add the port number, for example, `http://local.magento:8080`. You may also need to modify `docker-compose.yaml` file to update the exported port of the Magento container.
 
 ### How to keep installed Magento?
 
@@ -113,7 +132,7 @@ volumes:
 
 ### Where is the database?
 
-Magento 2 cannot run without a database. This image is for Magento 2 only. It doesn't contain MySQL server. MySQL server should be started in another container and linked with Magento 2 container. It's recommended to use Docker Compose to start both containers. You can also use [Kubernetes](https://kubernetes.io/) or other tools.
+Magento 2 cannot run without a database. This image is for Magento 2 only. It doesn't contain a MySQL server. A MySQL server should be started in another container and linked with Magento 2 container. It's recommended to use Docker Compose to start both containers. You can also use [Kubernetes](https://kubernetes.io/) or other tools.
 
 ### Why accessing http://local.magento?
 
@@ -124,6 +143,7 @@ If `localhost` doesn't work, try using `127.0.0.1`.
 ```
 127.0.0.1    local.magento
 ```
+
 
 ### How to update Magento 2 installation configurations?
 
@@ -159,7 +179,7 @@ services:
     volumes:
       - /dev/mytheme:/var/www/html/app/design/frontend/mytheme/default
   db:
-    image: mysql:5.6.23
+    image: mysql:8.0.0
     volumes:
       - db-data:/var/lib/mysql/data
     env_file:
@@ -191,4 +211,4 @@ When deploying those changes to production servers, we can simply copy all files
 
 ### Test Magento compatibilities
 
-This Docker images has different tags for corresponding Magento versions, e.g. `2.2.1`, `2.2.2`. You can switch to different Magento versions very easily when testing extensions and themes.
+This Docker images has different tags for corresponding Magento 2.4 versions. You can switch to different Magento versions very easily when testing extensions and themes.

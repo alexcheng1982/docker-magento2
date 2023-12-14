@@ -1,11 +1,11 @@
-FROM ghcr.io/alexcheng1982/docker-apache2-php8:{{phpVersion}}
+FROM ghcr.io/alexcheng1982/docker-apache2-php8:8.1
 
 LABEL maintainer="alexcheng1982@gmail.com"
-LABEL php_version="{{phpVersion}}"
-LABEL magento_version="{{magento2Version}}"
-LABEL description="Magento Open Source {{magento2Version}} with PHP {{phpVersion}}"
+LABEL php_version="8.1"
+LABEL magento_version="2.4.6-p3"
+LABEL description="Magento Open Source 2.4.6-p3 with PHP 8.1"
 
-ENV MAGENTO_VERSION {{magento2Version}}
+ENV MAGENTO_VERSION 2.4.6-p3
 ENV INSTALL_DIR /var/www/html
 ENV COMPOSER_HOME /var/www/.composer/
 
