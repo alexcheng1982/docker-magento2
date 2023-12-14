@@ -25,7 +25,7 @@ su www-data <<EOSU
     --opensearch-host=$OPENSEARCH_HOST \
     --opensearch-port=9200 \
     --opensearch-index-prefix=magento2 \
-    --opensearch-timeout=15
+    --opensearch-timeout=15 \
     --opensearch-enable-auth=false
 
 /var/www/html/bin/magento cron:install --force

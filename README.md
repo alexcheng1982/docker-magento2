@@ -4,26 +4,27 @@
 
 **This repo ONLY maintains Docker images for Magento Open Source 2.4.x. You may still found Docker images for old versions in the [old registry](https://quay.io/repository/alexcheng1982/magento2).**
 
-**Starting from Magento 2.4.x, container images are now hosted in GitHub Container Registry.**
+**Starting from Magento 2.4.x, container images are now hosted in [GitHub Container Registry](https://github.com/alexcheng1982/docker-magento2/pkgs/container/docker-magento2).**
 
-This repo provides Docker images for different Magento 2.4 versions. Refer to [this page](https://hub.docker.com/r/alexcheng/magento2/tags/) to see all available tags. It uses the same convention as my [Docker image for Magento 1.x](https://github.com/alexcheng1982/docker-magento).
+This repo provides Docker images for different Magento 2.4 versions. Refer to [this page](https://github.com/alexcheng1982/docker-magento2/pkgs/container/docker-magento2/versions) to see all available versions.
 
 This docker image is based on my [docker-apache2-php8](https://github.com/alexcheng1982/docker-apache2-php8) image for Apache 2 and PHP 8. Please refer to the image label `php_version` for the actual PHP version. In general, Magento `2.4.x` uses PHP `8.1`. Please refer to the label `php_version` of the image to get the actual PHP version.
 
-> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 22.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cron jobs working in Mangento.
+> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 22.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cron jobs working in Magento.
 
-**Please note: this Docker image is for development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. You can use this image as the base to build customized images.**
+**Please note: this Docker image is for Magento 2 related development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. You can use this image as the base to build customized images.**
 
 ## Magento 2 Installation Types
 
 Magento 2.4 can be installed using [Composer](https://getcomposer.org/) or git. The git-based installation mode is used for contributor of Magento. This Docker image uses Composer as the installation type, so the **Web Setup Wizard** can be used. 
 
-
 Below are some basic instructions.
 
 ## Quick Start
 
-The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://docs.docker.com/compose/). Just clone this repo and run following command in the root directory. The default `docker-compose.yml` uses MySQL, phpMyAdmin, and OpenSearch.
+The easiest way to start Magento 2 with MySQL is using [Docker Compose](https://docs.docker.com/compose/). Just clone this repo and run the following command in the directory of a specific version. For example, go to `versions/2.4.6-p3` for Magento `2.4.6-p3`.
+
+The default `docker-compose.yaml` uses MySQL, phpMyAdmin, and OpenSearch.
 
 ~~~
 $ docker compose up -d
@@ -69,10 +70,10 @@ To get all the possible values of `MAGENTO_LANGUAGE`, `MAGENTO_TIMEZONE` and `MA
 For example, to get all possible values of `MAGENTO_LANGUAGE`, run
 
 ```bash
-$ docker run --rm -it alexcheng/magento2 bin/magento info:language:list
+$ docker run --rm -it ghcr.io/alexcheng1982/docker-magento2:2.4.6-p3 info:language:list
 ```
 
-You can find all available options in the official [setup guide](http://devdocs.magento.com/guides/v2.0/install-gde/install/cli/install-cli-install.html#instgde-install-cli-magento). If you need more options, fork this repo and add them in `bin\install-magento`.
+You can find all available options in the official [guide](https://experienceleague.adobe.com/docs/commerce-operations/configuration-guide/cli/common-cli-commands.html?lang=en). If you need more options, fork this repo and add them in `bin\install-magento`.
 
 Please see the following video for a quick demo.
 
@@ -80,7 +81,7 @@ Please see the following video for a quick demo.
 
 ## Installation
 
-After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file.
+After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file. Use `docker ps` to find the container name;
 
 ### Magento 2
 
@@ -103,7 +104,7 @@ MySQL `8.0.0` is used as the default database version.
 
 ### Usage
 
-After Magento 2 is installed, open a browser and navigate to `http://local.magento/`. For admin access, navigate to `http://local.magento/admin/` and log in using the admin username and password specified in the `env` file. Default admin username and password are `admin` and `magentorocks1`, respectively.
+After Magento 2 is installed, open a browser and navigate to `http://local.magento/`. For admin access, navigate to `http://local.magento/admin/` and log in using the admin username and password specified in the `env` file. Default admin username and password are `admin` and `magentorocks1`, respectively. Two-factor authentication is disabled.
 
 ### Running on Windows
 
@@ -163,13 +164,13 @@ As I mentioned before, this Docker image is primarily used for development and t
 
 ### Extensions and themes
 
-You can keep the extensions and themes directories on your local host machine, and use Docker Compose [volumes](https://docs.docker.com/compose/compose-file/#volumes) to install the extensions and themes. For example, if you have a theme in the directory `/dev/mytheme`, you can install it by specifying it in the `docker-composer.yml` file. Then you can see the theme in Magento admin UI.
+You can keep the extensions and themes directories on your local host machine, and use Docker Compose [volumes](https://docs.docker.com/compose/compose-file/#volumes) to install the extensions and themes. For example, if you have a theme in the directory `/dev/mytheme`, you can install it by specifying it in the `docker-composer.yaml` file. Then you can see the theme in Magento admin UI.
 
 ```yml
 version: '3.0'
 services:
   web:
-    image: alexcheng/magento2
+    image: ghcr.io/alexcheng1982/docker-magento2:2.4.6-p3
     ports:
       - "80:80"
     links:
@@ -178,20 +179,6 @@ services:
       - env
     volumes:
       - /dev/mytheme:/var/www/html/app/design/frontend/mytheme/default
-  db:
-    image: mysql:8.0.0
-    volumes:
-      - db-data:/var/lib/mysql/data
-    env_file:
-      - env
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    ports:
-      - "8580:80"
-    links:
-      - db
-volumes:
-  db-data:
 ```
 
 ### Modify Magento core files

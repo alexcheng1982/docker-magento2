@@ -39,7 +39,7 @@ function createVersionDir(version) {
   }
 }
 
-const filesToCopy = ["auth.json", "install-magento", "install-sampledata"];
+const filesToCopy = ["auth.json", "install-magento", "install-sampledata", "env"];
 const templatedFiles = ["Dockerfile", "docker-compose.yaml"];
 Promise.map(versions, (versionConfig) => {
   const context = merge({}, versionConfig);

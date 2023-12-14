@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: alexcheng/magento2
+    image: ghcr.io/alexcheng1982/docker-magento2:{{magento2Version}}
     ports:
       - "80:80"
     links:
@@ -30,7 +30,6 @@ services:
       - db
   opensearch:
     image: opensearchproject/opensearch:{{openSearchVersion}}
-    container_name: opensearch
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch
