@@ -31,6 +31,7 @@ jobs:
         version:
           - 2.4.6-p3
           - 2.4.5-p5
+          - 2.4.4-p6
 
     steps:
       - name: Checkout repository

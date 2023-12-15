@@ -9,11 +9,17 @@ const versions = [
     phpVersion: "8.1",
     magento2Version: "2.4.6-p3",
     openSearchVersion: "2",
-  },{
+  },
+  {
     phpVersion: "8.1",
     magento2Version: "2.4.5-p5",
     openSearchVersion: "1",
-  }
+  },
+  {
+    phpVersion: "8.1",
+    magento2Version: "2.4.4-p6",
+    openSearchVersion: "1",
+  },
 ];
 
 function getVersionDir(version) {
@@ -43,7 +49,12 @@ function createVersionDir(version) {
   }
 }
 
-const filesToCopy = ["auth.json", "install-magento", "install-sampledata", "env"];
+const filesToCopy = [
+  "auth.json",
+  "install-magento",
+  "install-sampledata",
+  "env",
+];
 const templatedFiles = ["Dockerfile", "docker-compose.yaml"];
 Promise.map(versions, (versionConfig) => {
   const context = merge({}, versionConfig);
