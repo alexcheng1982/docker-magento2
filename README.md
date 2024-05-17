@@ -124,6 +124,12 @@ Then `taskkill /F /PID <pid>` can be used to kill the process to free the port.
 
 ## FAQ
 
+### How to update Magento 2 version?
+
+To update Magento 2 version, fork this repository and modify `update.js`. In the `versions` array, add a new version with Magento 2 version number and PHP version. The base image [docker-apache2-php8](https://github.com/alexcheng1982/docker-apache2-php8) has PHP versions `8.1`, `8.2`, and `8.3`.
+
+Run `update.js` using NodeJS. Files of the new version will be generated in directory `versions/<version_name>`. Run `docker build` in the version's directory to build the container image.
+
 ### How to use a different port?
 
 If the default port `80` cannot be used for some reasons, you can change to a different port. Simply change the `MAGENTO_URL` from `http://local.magento` to add the port number, for example, `http://local.magento:8080`. You may also need to modify `docker-compose.yaml` file to update the exported port of the Magento container.
