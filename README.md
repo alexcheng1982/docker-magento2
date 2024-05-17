@@ -8,15 +8,15 @@
 
 This repo provides Docker images for different Magento 2.4 versions. Refer to [this page](https://github.com/alexcheng1982/docker-magento2/pkgs/container/docker-magento2/versions) to see all available versions.
 
-| Version    | Container image                                  |
-| ---------- | ------------------------------------------------ |
-| `2.4.6-p3` | `ghcr.io/alexcheng1982/docker-magento2:2.4.6-p3` |
-| `2.4.5-p5` | `ghcr.io/alexcheng1982/docker-magento2:2.4.5-p5` |
-| `2.4.4-p6` | `ghcr.io/alexcheng1982/docker-magento2:2.4.4-p6` |
+| Version    | PHP Version | Container image                                  |
+| ---------- | ----------- | ------------------------------------------------ |
+| `2.4.6-p3` | `8.1`       | `ghcr.io/alexcheng1982/docker-magento2:2.4.6-p3` |
+| `2.4.5-p5` | `8.1`       | `ghcr.io/alexcheng1982/docker-magento2:2.4.5-p5` |
+| `2.4.4-p6` | `8.1`       | `ghcr.io/alexcheng1982/docker-magento2:2.4.4-p6` |
 
 This docker image is based on my [docker-apache2-php8](https://github.com/alexcheng1982/docker-apache2-php8) image for Apache 2 and PHP 8. Please refer to the image label `php_version` for the actual PHP version. In general, Magento uses PHP `8.1` starting from `2.4.4`. Versions `2.4.2` and `2.4.3` use PHP `7.4`. Please refer to the label `php_version` of the image to get the actual PHP version.
 
-> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 22.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cron jobs working in Magento.
+> This docker image is based on [phusion/baseimage-docker](https://github.com/phusion/baseimage-docker) with Ubuntu 22.04 LTS. The reason to use `phusion/baseimage-docker` is to support multiple processes, which is important to get cronjobs working in Magento.
 
 **Please note: this Docker image is for Magento 2 related development and testing only, not ready for production use. Setting up a Magento 2 production server requires more configurations. You can use this image as the base to build customized images.**
 
@@ -87,7 +87,7 @@ Please see the following video for a quick demo.
 
 ## Installation
 
-After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file. Use `docker ps` to find the container name;
+After starting the container, you'll see the setup page of Magento 2. You can use the script `install-magento` to quickly install Magento 2. The installation script uses the variables in the `env` file. Use `docker ps` to find the container name.
 
 ### Magento 2
 
@@ -132,7 +132,7 @@ If the default port `80` cannot be used for some reasons, you can change to a di
 
 You can add a volume to folder `/var/www/html`, see the `docker-compose.yml` file.
 
-```
+```yaml
 volumes: 
   - magento-data:/var/www/html 
 ```

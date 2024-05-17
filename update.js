@@ -6,19 +6,28 @@ const path = require("path");
 
 const versions = [
   {
+    baseImage: "ghcr.io/alexcheng1982/docker-apache2-php8",
     phpVersion: "8.1",
-    magento2Version: "2.4.6-p3",
+    magento2Version: "2.4.6-p5",
     openSearchVersion: "2",
+    mysqlVersion: "8.0.0",
+    composerInstallArgs: "",
   },
   {
+    baseImage: "ghcr.io/alexcheng1982/docker-apache2-php8",
     phpVersion: "8.1",
     magento2Version: "2.4.5-p5",
     openSearchVersion: "1",
+    mysqlVersion: "8.0.0",
+    composerInstallArgs: "",
   },
   {
+    baseImage: "ghcr.io/alexcheng1982/docker-apache2-php8",
     phpVersion: "8.1",
     magento2Version: "2.4.4-p6",
     openSearchVersion: "1",
+    mysqlVersion: "8.0.0",
+    composerInstallArgs: "",
   },
 ];
 

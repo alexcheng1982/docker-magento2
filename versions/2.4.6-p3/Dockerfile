@@ -38,7 +38,7 @@ RUN chsh -s /bin/bash www-data
 
 RUN chown -R www-data:www-data /var/www
 
-RUN su www-data -c "composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $INSTALL_DIR $MAGENTO_VERSION"
+RUN su www-data -c "COMPOSER_MEMORY_LIMIT=-1 composer create-project --repository-url=https://repo.magento.com/ magento/project-community-edition $INSTALL_DIR $MAGENTO_VERSION"
 
 RUN cd $INSTALL_DIR \
     && find var generated vendor pub/static pub/media app/etc -type f -exec chmod g+w {} + \

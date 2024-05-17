@@ -1,7 +1,7 @@
 version: '3.0'
 services:
   web:
-    image: ghcr.io/alexcheng1982/docker-magento2:{{magento2Version}}
+    image: ghcr.io/alexcheng1982/docker-magento2:2.4.6-p5
     ports:
       - "80:80"
     links:
@@ -15,7 +15,7 @@ services:
     env_file:
       - env
   db:
-    image: mysql:{{mysqlVersion}}
+    image: mysql:8.0.0
     volumes:
       - db-data:/var/lib/mysql
     env_file:
@@ -29,7 +29,7 @@ services:
     depends_on:
       - db
   opensearch:
-    image: opensearchproject/opensearch:{{openSearchVersion}}
+    image: opensearchproject/opensearch:2
     environment:
       - cluster.name=opensearch-cluster
       - node.name=opensearch
