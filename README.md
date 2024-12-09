@@ -92,13 +92,13 @@ After starting the container, you'll see the setup page of Magento 2. You can us
 ### Magento 2
 
 ~~~
-$ docker exec -it <container_name> install-magento
+$ docker-compose exec web install-magento
 ~~~
 
 ### Sample data
 
 ~~~
-$ docker exec -it <container_name> install-sampledata
+$ docker-compose exec web install-sampledata
 ~~~
 
 
